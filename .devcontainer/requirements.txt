@@ -10,6 +10,8 @@ Flask-Principal
 Flask-Login
 neo4j
 pandas
+passlib
+phonenumbers
 py2neo
 python-decouple
 python-dotenv

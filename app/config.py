@@ -2,7 +2,6 @@
 """
 
 """
-
 import os
 from decouple import config
 
@@ -10,7 +9,6 @@ class Config(object):
     #SETUP Flask Base Enviroment Variables and Defaults
     basedir    = os.path.abspath(os.path.dirname(__file__))
     SECRET_KEY = 'S#perS3crEt_007'
-
 
 class ProductionConfig(Config):
     DEBUG = False
@@ -27,7 +25,6 @@ class ProductionConfig(Config):
     #     config( 'DB_PORT'     , default=5432            ),
     #     config( 'DB_NAME'     , default='' )
     # )
-
 class DebugConfig(Config):
     DEBUG = True
     NEO4J_PASSWORD = 'test'
