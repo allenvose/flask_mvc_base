@@ -42,13 +42,17 @@ class MobileVerification():
             string: line type associated with the phone number
             possible values are mobile, landline, or voip
         """
-        phone_number_type = self._client \
-            .lookups \
-            .phone_numbers(self.phone) \
-            .fetch(type='carrier') \
-            .carrier
+        try:
+            phone_number_type = self._client \
+                .lookups \
+                .phone_numbers(self.phone) \
+                .fetch(type='carrier') \
+                .carrier
+            return phone_number_type['type']
+        except:
+            return None
 
-        return phone_number_type['type']
+        
 
     def twilio_create_verify_service(service_name):
         account_sid = 'AC763f94a1112c63aafd37cca681badc26'

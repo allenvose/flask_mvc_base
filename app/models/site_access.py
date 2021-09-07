@@ -121,7 +121,7 @@ class Phone(Model):
 
 class System_Account(Model):
     __primarylabel__ = 'System_Account'
-    __primarykey__ = "username"
+    __primarykey__ = "email"
 
     username = Property()
     email = Property()

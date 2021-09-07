@@ -3,9 +3,8 @@
 
 """
 from logging import basicConfig, DEBUG, getLogger, StreamHandler
-from os import path
 from importlib import import_module
-from flask import Flask, url_for
+from flask import Flask
 from flask_login import LoginManager
 from flask_principal import Principal, Permission, RoleNeed
 from app.controllers.utils.extensions.flask_2neo4j.driver import Flask_Python2Neo4J
@@ -21,24 +20,11 @@ def register_extensions(app):
     principal.init_app(app)
 
 def register_controllers(app):
-    controllers = ['authorization', 'base']
+    controllers = ['site_access', 'site_base', 'errors']
     for controller in controllers:
-        blueprint_module = import_module('app.controllers.routes.{}_routes'.format(controller))
+        blueprint_module = import_module('app.controllers.{}.routes'.format(controller))
         app.register_blueprint(blueprint_module.blueprint_init())
     
-
-def configure_database(app):
-
-    @app.before_first_request
-    def initialize_database():
-        #db.create_all()
-        pass
-
-    @app.teardown_request
-    def shutdown_session(exception=None):
-        #db.session.remove()
-        pass
-
 def create_app(config):
     app = Flask(__name__, static_folder='views/static', template_folder='views/templates')
     app.config.from_object(config)

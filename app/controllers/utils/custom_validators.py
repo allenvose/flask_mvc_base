@@ -1,12 +1,11 @@
+from logging import exception
 from passlib.hash import sha256_crypt
 from wtforms import ValidationError
 import phonenumbers
 from phonenumbers import NumberParseException
 
 from app import db
-from app.models.phone import Phone
-from app.models.accounts import System_Account
-
+from app.models.site_access import Phone, System_Account
 
 def hash_password(password_input):
     return sha256_crypt.encrypt(password_input)
@@ -34,8 +33,8 @@ def sms_field_validator():
                     field.data = phonenumbers.format_number(sms_capable_phone, phonenumbers.PhoneNumberFormat.E164 )
                     if Phone.match(db.repo, field.data).first():
                         raise ValidationError('This number is already registered')
-                except:
-                    raise ValidationError('There was a problem registering this number')
+                except Exception as e:
+                    raise ValidationError(e)
     return _new_sms_number
 
 
@@ -50,6 +49,6 @@ def user_exists_validator():
             print(username)
             if System_Account.match(db.repo, username).first():
                 raise ValidationError('This username is already registered')
-        except:
-            raise ValidationError('There was a problem registering this number')
+        except Exception as e:
+            raise ValidationError(e)
     return __check__

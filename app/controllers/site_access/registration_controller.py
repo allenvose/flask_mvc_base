@@ -2,11 +2,10 @@
 """
 
 """
-
 from app import db
-from app.models.phone import Phone, Person, System_Account
+from app.models.site_access import Phone, Person, System_Account
 
-class RegistrationSystem(): 
+class UserRegistrationSystem(): 
     username: str = None
     password: str = None
     first_name: str = None
