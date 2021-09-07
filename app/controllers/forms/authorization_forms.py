@@ -8,7 +8,7 @@ from wtforms.validators import InputRequired, Email, DataRequired, Length, Regex
 from wtforms import TextField, PasswordField
 from wtforms.validators import InputRequired, Email, DataRequired
 
-from app.controllers.utils.cutom_validators import 
+from app.controllers.utils.custom_validators import sms_field_validator, user_exists_validator
 
 ## login and registration
 
@@ -30,7 +30,7 @@ class  RegistrationForm(FlaskForm):
                         validators=[InputRequired(message='User ID is required'),
                         Length(max=35, message='Maximum of 35 characters allowed'),
                         Regexp('^[^@]*$', message='Only include the username portion of the email'),
-                        already_exists_validator()])
+                        user_exists_validator()])
             
     password = PasswordField('Password', id='pwd_create',
                         validators=[DataRequired(),

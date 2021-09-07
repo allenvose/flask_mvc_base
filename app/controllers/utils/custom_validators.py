@@ -1,8 +1,8 @@
-import re
 from passlib.hash import sha256_crypt
 from wtforms import ValidationError
 import phonenumbers
 from phonenumbers import NumberParseException
+
 from app import db
 from app.models.phone import Phone
 from app.models.accounts import System_Account
@@ -39,7 +39,7 @@ def sms_field_validator():
     return _new_sms_number
 
 
-def already_exists_validator():
+def user_exists_validator():
     def __check__(form, field):
         try:
             other = form['company_association']

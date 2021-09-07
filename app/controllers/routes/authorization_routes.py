@@ -1,12 +1,13 @@
 # -*- encoding: utf-8 -*-
 """
 """
-
+from passlib.hash import sha256_crypt
 from flask import Blueprint, jsonify, render_template, redirect, request, url_for
 from flask_login import (current_user, login_required, login_user, logout_user)
 
 from app import login_manager
-from app.controllers.forms.authorization_forms import LoginForm, CreateAccountForm
+from app.controllers.access_and_registrion.registration_controller import RegistrationSystem
+from app.controllers.forms.authorization_forms import LoginForm, RegistrationForm
 from app.models.models import User
 
 from app.controllers.utils.util import verify_pass
@@ -55,42 +56,55 @@ def login():
 
 @authorization.route('/register', methods=['GET', 'POST'])
 def register():
-    login_form = LoginForm(request.form)
-    create_account_form = CreateAccountForm(request.form)
+    registration_form = RegistrationForm(request.form)
     if 'register' in request.form:
+        if registration_form.validate_on_submit():
+            registration_form.password.data = sha256_crypt.encrypt(registration_form.password.data)
+            new_user = RegistrationSystem()
+            registration_form.populate_obj(new_user)
+            print(new_user)
+            new_user.save()
+            #test_model = CreateAccountModel.from_orm(create_account_form)
+            #print(test_model)
+            # system_account = db.repo.match(System_Account, create_account_form.username).first()
+            # mobile_phone = db.repo.match(Phone, create_account_form.sms_number).first()
+            # if system_account:
+            #     if system_account.username == create_account_form.username:
+            #         return render_template( 'accounts/register.html', 
+            #                             msg='Username already registered, please login or request help',
+            #                             success=False,
+            #                             form=create_account_form)
+            #     if system_account.email == create_account_form.email:
+            #         return render_template( 'accounts/register.html', 
+            #                             msg='Email already registered, please login or request help', 
+            #                             success=False,
+            #                             form=create_account_form)
+            # if mobile_phone:
+            #     if mobile_phone.phone_number == create_account_form.sms_number:
+            #         return render_template( 'accounts/register.html', 
+            #                             msg='Mobile number is already registered',
+            #                             success=False,
+            #                             form=create_account_form)
 
-        username  = request.form['username']
-        email     = request.form['email'   ]
-
-        # Check usename exists
-        user = User.query.filter_by(username=username).first()
-        if user:
-            return render_template( 'auth/register.html', 
-                                    msg='Username already registered',
-                                    success=False,
-                                    form=create_account_form)
-
-        # Check email exists
-        user = User.query.filter_by(email=email).first()
-        if user:
-            return render_template( 'auth/register.html', 
-                                    msg='Email already registered', 
-                                    success=False,
-                                    form=create_account_form)
-
-        # else we can create the user
-        user = User(**request.form)
-        #db.session.add(user)
-        #db.session.commit()
-
-        return render_template( 'authorization/register.html', 
-                                msg='User created please <a href="/login">login</a>', 
-                                success=True,
-                                form=create_account_form)
-
-    else:
-        return render_template( 'authorization/register.html', form=create_account_form, segement='index')
-
+            # if system_account is None and mobile_phone is None:
+            # # # else we can create the user
+            #     hashed_pasword = sha256_crypt.encrypt(create_account_form.password)
+            #     system_account = System_Account()
+            #     system_account.username = username
+            #     system_account.email = email
+            #     system_account.hashed_password = hashed_pasword
+            #     db.repo.save(system_account)
+            #     print('User Created')
+            #     return render_template( 'accounts/register.html', 
+            #                     msg='User created please <a href="/login">login</a>', 
+            #                     success=True,
+            #                     form=create_account_form)
+        # else:
+        #     return render_template( 'accounts/login.html',
+        #                             form=create_account_form,
+        #                             success=False, segment='index')
+   
+    return render_template( 'authorization/register.html', form=registration_form, segment='index')
 @authorization.route('/logout')
 def logout():
     logout_user()
