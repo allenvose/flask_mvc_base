@@ -8,11 +8,11 @@ from app import login_manager
 from jinja2 import TemplateNotFound
 
 base = Blueprint(
-    'base_routes',
+    'site_base_routes',
     __name__,
     url_prefix='',
     #template_folder='/home/templates',
-    static_folder='/views/static'
+    #static_folder='/views/static'
 )
 
 def blueprint_init():

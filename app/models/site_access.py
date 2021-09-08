@@ -140,5 +140,50 @@ class System_Account(Model):
     def save(self):
         db.repo.save(self)
 
+class Company(Model):
+    __primarylabel__ = 'Company'
+    __primarykey__ = 'display_name'
+
+    company_name = Property()
+    company_url = Property()
+    company_logo = Property()
+    company_type = Property()
+    duns = Property()
+    figi = Property()
+    foundedYear = Property()
+    locationsCount = Property()
+    long_description = Property()
+    short_description = Property()
+    status = Property()
+    stock_ticker = Property()
+    tax_id = Property()
+    homepage_url = Property()
+    blog_url = Property()
+    craft_url = Property()
+    crunchbase_url = Property()
+    facebook_url = Property()
+    instagram_url = Property()
+    linkedin_url = Property()
+    pinterest_url = Property()
+    twitter_url = Property()
+    youtube_url = Property()
+
+    parent_company = RelatedFrom('Company')
+    employees = RelatedFrom('People', 'EMPLOYED_BY')
+    phonenumbers = RelatedFrom('Phone', 'COMPANY_PHONELINE')
+    locations = RelatedFrom('Places', 'ADDRESS')
+
+    @classmethod
+    def create_new(cls, company_name, company_url, company_logo):
+        return cls()
+
+    def save(self):
+        db.repo.save(self)
 
     
+class Places(Model):
+    __primarylabel__ = 'Places'
+    __primarykey__ = 'address'
+
+    address = Property()
+

@@ -1,3 +1,4 @@
+clearbit
 dash==1.21.0
 dash-bootstrap-components
 dash-core-components==1.17.1
@@ -8,6 +9,9 @@ Flask
 Flask-WTF
 Flask-Principal
 Flask-Login
+folium
+geopy
+investpy
 neo4j
 pandas
 passlib

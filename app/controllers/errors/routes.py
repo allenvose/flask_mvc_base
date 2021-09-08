@@ -7,7 +7,8 @@ errors = Blueprint(
     __name__,
     url_prefix='',
     #template_folder='/views/templates/',
-    static_folder='/views/static')
+    #static_folder='/views/static'
+)
 
 def blueprint_init():
     return errors
