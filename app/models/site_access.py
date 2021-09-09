@@ -131,8 +131,8 @@ class System_Account(Model):
     user_account = RelatedFrom('Person', 'USER_ACCOUNT') 
     
     @classmethod
-    def create_new(cls, username, email, password, is_active=False):
-        return cls(username=username, email=email, is_active=is_active)
+    def create_new(cls, username, email, hashed_password, is_active=False):
+        return cls(username=username, email=email, hashed_password=hashed_password, is_active=is_active)
     
     def verify_password(self, input_password):
         return sha256_crypt.verify(input_password, self.hashed_password)
@@ -142,7 +142,7 @@ class System_Account(Model):
 
 class Company(Model):
     __primarylabel__ = 'Company'
-    __primarykey__ = 'display_name'
+    __primarykey__ = 'company_name'
 
     company_name = Property()
     company_url = Property()
@@ -175,7 +175,7 @@ class Company(Model):
 
     @classmethod
     def create_new(cls, company_name, company_url, company_logo):
-        return cls()
+        return cls(company_name=company_name, company_url=company_url, company_logo=company_logo)
 
     def save(self):
         db.repo.save(self)

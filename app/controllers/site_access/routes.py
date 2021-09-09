@@ -64,8 +64,8 @@ def register_user():
 @authorization.route('/register/company', methods=['GET', 'POST'])
 def register_compnay():
     company_registration_data = RegisterCompanyForm(request.form)
-    if 'Register New Compnay' in request.form:
-        print('Found it')
+    if 'register_company' in request.form:
+        print(request.form)
         if company_registration_data.validate_on_submit():
             new_company = CompanyRegistration()
             company_registration_data.populate_obj(new_company)

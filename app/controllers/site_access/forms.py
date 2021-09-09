@@ -59,21 +59,17 @@ class  RegisterUserForm(FlaskForm):
                         EqualTo('password', message='Passwords must match'), ])
 
 class  RegisterCompanyForm(FlaskForm):
-    company_name = StringField('User', id='user_name_create',
+    company_name = StringField('Company Name', id='company_name',
                         validators=[InputRequired(message='User ID is required'),
                         Length(max=35, message='Maximum of 35 characters allowed'),
-                        Regexp('^[^@]*$', message='Only include the username portion of the email'),
-                        user_exists_validator()])
+                        ])
             
-    company_url = StringField('Password', id='pwd_create',
+    company_url = StringField('Company URL', id='company_url',
                         validators=[DataRequired(),
                         Length(min=8, max=35, message='Must be a minimum of 2 letters and less than 35'),
-                        Regexp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$',
-                        message='Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:'
-                        ),])
+                        ])
 
     company_logo = StringField('Logo', id='company_logo',
                         validators=[InputRequired(message='User ID is required'),
-                        Length(max=35, message='Maximum of 35 characters allowed'),
-                        Regexp('^[^@]*$', message='Only include the username portion of the email'),
-                        user_exists_validator()])
+                        Length(max=200, message='Maximum of 35 characters allowed'),
+                        ])
