@@ -38,3 +38,17 @@ class CompanyRegistration():
         new_company = Company.create_new(self.company_name, self.company_url, self.company_logo)
         print(new_company)
         db.repo.save(new_company)
+
+class EditCompany():
+
+    def __init__(self) -> None:
+        self.company_name: str = None
+        self.company_url: str = None
+        self.company_logo: str = None
+        
+   
+    def save(self):
+        print(self.company_name, self.company_url, self.company_logo)
+        new_company = Company.create_new(self.company_name, self.company_url, self.company_logo)
+        print(new_company)
+        db.repo.save(new_company)

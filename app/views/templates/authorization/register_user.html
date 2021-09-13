@@ -48,12 +48,14 @@
                                 <div class="col-md-8 col-lg-8">
                                     <h4>Registration</h4>
                                     <div class="form-group">
+                                        {{mydash | safe}}
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="icon-user"></i>
                                                 </span>
                                             </div>
+                                            
                                             {{ form.first_name(placeholder="First Name", class="form-control") }}<br>
                                             {% for error in form.first_name.errors %}
                                                 <li style="color:red;">{{error}}</li>
@@ -171,6 +173,7 @@
             </div>
         </div>
     </div>
+   
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->

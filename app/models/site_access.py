@@ -1,5 +1,6 @@
 
 from datetime import (datetime, timezone)
+import re
 import phonenumbers
 import requests
 from passlib.hash import sha256_crypt
@@ -179,6 +180,13 @@ class Company(Model):
 
     def save(self):
         db.repo.save(self)
+    
+    @staticmethod
+    def get_name_url_logo():
+        companies = db.repo.match(Company).all()
+        return [ {'company_name': company.company_name, 'company_url': company.company_url, 'company_logo': company.company_logo} for company in companies]
+       
+
 
     
 class Places(Model):

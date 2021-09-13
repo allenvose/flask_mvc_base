@@ -2,6 +2,7 @@
 """
 
 """
+from dash import Dash, html, dcc, Input, Output
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import login_required, current_user
 from app import login_manager
@@ -17,6 +18,36 @@ base = Blueprint(
 
 def blueprint_init():
     return base
+
+base_dash = Dash(
+    name= 'base_dash',
+    server=False, 
+    external_stylesheets=['https://codepen.io/chriddyp/pen/bWLwgP.css'],
+    url_base_pathname='/register/base/', assets_folder='views/static')
+
+def dash_init():
+    return base_dash
+
+base_dash.layout = html.Div([
+    html.H6("Change the value in the text box to see callbacks in action, ALLEN!"),
+    html.Div([
+        "Input: ",
+        dcc.Input(id='my-input', value=0, type='int')
+    ]),
+    html.Br(),
+    html.Div(id='my-output'),
+
+])
+
+@base_dash.callback(
+    Output(component_id='my-output', component_property='children'),
+    Input(component_id='my-input', component_property='value')
+)
+def update_output_div(input_value):
+    input_value = int(input_value)
+    return ' My new Output: {}'.format(str(input_value*1000))
+
+
 
 @base.route('/index')
 @login_required
