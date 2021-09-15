@@ -30,7 +30,6 @@
             </li>
         </ul>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -43,62 +42,19 @@
                 <form method="post" action="">
                     {{ form.hidden_tag() }}
                     <div class="card-body">
-                        <div class="card-title mb-4">Manage an Existing Company</div>
-                        <div id="demo" class="carousel slide" data-ride="carousel">
-
-                           
+                        <div class="card-title mb-4">Manage an Existing Company
                             
-                            <!-- The slideshow -->
-                            <div class="container carousel-inner no-padding">
-                              <div class="carousel-item active">
-                                {% for company in existing_companies %}
-                                <div class="col-xs-3 col-sm-3 col-md-3">
-                                    <a href="http://www.{{company['company_url']}}">
-                                        <img src="{{company['company_logo']}}" class="img-responsive center-block d-block mx-auto" width="60" height="60" alt="Photo of Milford Sound in New Zealand" />
-                                    </a>
-                                    <h5 class='text-center mt-2'>{{company['company_name']}}</h5>
-                                </div>    
-                                {% endfor %}
-                              </div>
-                              <div class="carousel-item">
-                                {% for company in existing_companies %}
-                                <div class="col-xs-3 col-sm-3 col-md-3">
-                                    <a href="http://www.{{company['company_url']}}">
-                                        <img src="{{company['company_logo']}}" class="img-responsive center-block d-block mx-auto" width="60" height="60" alt="Photo of Milford Sound in New Zealand" />
-                                    </a>
-                                </div>    
-                                {% endfor %}
-                              </div>
-                              <div class="carousel-item">
-                                {% for company in existing_companies %}
-                                <div class="col-xs-3 col-sm-3 col-md-3">
-                                    <a href="http://www.{{company['company_url']}}">
-                                        <img src="{{company['company_logo']}}" class="img-responsive center-block d-block mx-auto" width="60" height="60" alt="Photo of Milford Sound in New Zealand" />
-                                    </a>
-                                </div>    
-                                {% endfor %}
-                              </div>
-                            </div>
-                            
-                            <!-- Left and right controls -->
-                            <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                              <span class="carousel-control-prev-icon"></span>
-                            </a>
-                            <a class="carousel-control-next" href="#demo" data-slide="next">
-                              <span class="carousel-control-next-icon"></span>
-                            </a>
-                          </div>
-                          <div class="col-xs-3 col-sm-3 col-md-3">
                             {% for company in existing_companies %}
-                           
+                            <div class="col-md-2 col-lg-4"></div>
                                 
                                     <a href="http://www.{{company['company_url']}}">
-                                        <img src="{{company['company_logo']}}" class="img-responsive center-block d-block mx-auto" width="60" height="60" alt="Photo of Milford Sound in New Zealand" />
+                                        <img src="{{company['company_logo']}}" class="img-responsive center-block d-block mx-auto" width="50" height="50" alt="Photo of Milford Sound in New Zealand" />
                                     </a>
                                     <h5 class='text-center mt-2'>{{company['company_name']}}</h5>
+                            </div>
                             
                             {% endfor %}
-                            </div>>
+                            
                         </div>
                     </div>
                     <div class="card-body">
@@ -157,27 +113,14 @@
                                         {{mydash | safe}}  
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-12">
-
-                                        
-                                        
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-12">
-                                        
-                                    </div>
-                                    <div class="col-md-8 col-lg-8">
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
+         </div>
     </div>
+</div>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
