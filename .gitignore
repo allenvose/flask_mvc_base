@@ -11,6 +11,8 @@ __pycache__/
 *.sqlite3
 *.log
 neo4j/
+results/
+mongodb-data/
 
 # venv
 env

@@ -44,21 +44,21 @@ services:
       - backend
     restart: unless-stopped
 
-mongodb:
-    container_name: mongodb
-    image: mongo:latest
-    volumes:
-      - ../mongodb-data:/data/db
-    ports:
-      - "27017:27017"
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD= example
-      - MONGO_INITDB_DATABASE= portal
-    networks:
-      - frontend
-      - backend
-    restart: unless-stopped
+  mongodb:
+      container_name: mongodb
+      image: mongo:latest
+      volumes:
+        - ../mongodb-data:/data/db
+      ports:
+        - "27017:27017"
+      environment:
+        - MONGO_INITDB_ROOT_USERNAME=root
+        - MONGO_INITDB_ROOT_PASSWORD= example
+        - MONGO_INITDB_DATABASE= portal
+      networks:
+        - frontend
+        - backend
+      restart: unless-stopped
 
 networks:
   frontend:

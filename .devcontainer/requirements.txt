@@ -7,9 +7,10 @@ dash-extensions
 dash-html-components==2.0.0
 email_validator
 Flask
-Flask-WTF
-Flask-Principal
 Flask-Login
+Flask-Principal
+Flask-PyMongo
+Flask-WTF
 folium
 geopy
 investpy
